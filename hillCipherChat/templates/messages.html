@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hill Cipher Messages</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #2c3e50; }
+        h2 { color: #34495e; }
+        ul { list-style-type: none; padding-left: 0; }
+        li { background: #ecf0f1; margin: 10px 0; padding: 15px; border-radius: 5px; }
+        table { border-collapse: collapse; margin-top: 5px; }
+        td, th { border: 1px solid #999; padding: 8px 12px; text-align: center; }
+        .matrix-title { font-weight: bold; margin-top: 10px; }
+        .notice { font-size: 14px; color: #7f8c8d; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <h1>Ω Hill Cipher Server Messages</h1>
+    <p class="notice"><em>Make sure to refresh the page after 30s or so to see what became of your message or your friend's message!</em></p>
+
+    <h2>Encrypted Messages</h2>
+    {% if encrypted_messages %}
+        <ul>
+            {% for item in encrypted_messages %}
+                <li>
+                    <strong>Original Text:</strong> {{ item.original_text }}<br>
+                    <strong>Cipher Text:</strong> {{ item.cipher_text }}
+                    {% for step in item.matrix_steps %}
+                        <div class="matrix-title">Numeric Representation:</div>
+                        {{ step.numeric_representation }}<br>
+
+                        <div class="matrix-title">Text Matrix:</div>
+                        <table>
+                            {% for row in step.text_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <div class="matrix-title">Key Matrix:</div>
+                        <table>
+                            {% for row in step.key_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <div class="matrix-title">Result Matrix:</div>
+                        <table>
+                            {% for row in step.result_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endfor %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No encrypted messages yet.</p>
+    {% endif %}
+
+    <h2>Decrypted Messages</h2>
+    {% if decrypted_messages %}
+        <ul>
+            {% for item in decrypted_messages %}
+                <li>
+                    <strong>Original Text:</strong> {{ item.original_text }}<br>
+                    <strong>Plain Text:</strong> {{ item.plain_text }}
+                    {% for step in item.matrix_steps %}
+                        <div class="matrix-title">Numeric Representation:</div>
+                        {{ step.numeric_representation }}<br>
+
+                        <div class="matrix-title">Text Matrix:</div>
+                        <table>
+                            {% for row in step.text_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <div class="matrix-title">Key Matrix:</div>
+                        <table>
+                            {% for row in step.key_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+
+                        <div class="matrix-title">Result Matrix:</div>
+                        <table>
+                            {% for row in step.result_matrix %}
+                                <tr>
+                                    {% for val in row %}
+                                        <td>{{ val }}</td>
+                                    {% endfor %}
+                                </tr>
+                            {% endfor %}
+                        </table>
+                    {% endfor %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No decrypted messages yet.</p>
+    {% endif %}
+</body>
+</html>
